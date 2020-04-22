@@ -169,10 +169,11 @@ if(maxprice!='') {
 
 <!-- content starts -->
 <div class="cart-index__content col-md-12 col-xs-12 col-sm-12">
-    <div class="cart-index__content col-md-3 col-xs-3 col-sm-3">
+    <div class="cart-index__slider col-md-3 col-xs-3 col-sm-3">
         <div class="slidecontainer">
+            <p><strong>Filters</strong></p>
   <input type="range" min="100" max="1000" value="500" class="slider" id="myRange">
-  <p>Price: <span id="price_val"></span></p>
+  <p>Price: &#x20b9; <span id="price_val"></span></p>
             <p><a href="javascript:void(0);" class="cart-apply__price">Apply</a></p>
 </div>
         <script>
@@ -186,7 +187,8 @@ slider.oninput = function() {
 </script>
         
     </div>
-    <div class="cart-index__content col-md-9 col-xs-9 col-sm-9">
+    
+    <div class="cart-index__container col-md-9 col-xs-9 col-sm-9">
         <div class="cart-index__content--title">
             <strong>Sort By</strong>
             <span><a href="index.html?val=desc">Price High -- Low</a></span>
