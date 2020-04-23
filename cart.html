@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart application - Cart</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/cart.css">
+    
+<script src="json/Cart.json"></script>
+<script>
+$(document).ready(function(){
+$(".card-index-search").click(function(){
+ var inputsearch = $('.cart-inputsearch').val();
+    window.location.href = 'index.html?q='+inputsearch;
+});
+    
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+var removeitem = getParameterByName('removeitem'); // "add item"
+    //alert(removeitem);
+    
+if(removeitem!==null){
+    //initialize an array
+    var viewitemDetailsUpdate = [];
+    viewitemDetailsUpdate = JSON.parse(localStorage.getItem('itemDetails')); 
+    localStorage.removeItem('itemDetails');
+    
+    for(var a = 0; a<viewitemDetailsUpdate.length; a++) {
+        var viewitemDetailsNew = [];
+        
+        if(viewitemDetailsUpdate[a].id!=removeitem) {
+            var itemObj = {
+            id: removeitem,
+            name: viewitemDetailsUpdate[a].name,
+            category: viewitemDetailsUpdate[a].category,
+            price: viewitemDetailsUpdate[a].price,
+            discount: viewitemDetailsUpdate[a].discount,
+            img_url: viewitemDetailsUpdate[a].img_url,
+            count: 1
+          }
+            
+            console.log(itemObj);
+                    
+            //get bookmarks from localStorage
+            
+                        
+            //add itemObj into array
+            viewitemDetailsNew.push(itemObj);             
+            
+            //add item to storage                
+            localStorage.setItem('itemDetails', JSON.stringify(viewitemDetailsNew));
+        }
+    }
+}
+    
+if(localStorage.getItem('itemDetails') !== null){
+    //initialize an array
+    var viewitemDetails = [];
+    viewitemDetails = JSON.parse(localStorage.getItem('itemDetails'));
+    //console.log(viewitemDetails);
+    var outdisplayItems = "";
+    
+    for(var a = 0; a<viewitemDetails.length; a++) {
+        console.log(viewitemDetails);
+        //console.log(viewitemDetails[a].name);
+        
+        outdisplayItems += '<div class="cart-item__viewcart col-md-8 col-xs-12 col-sm-12"><div class="col-md-3 col-xs-6 col-sm-6"><img src="'+viewitemDetails[a].img_url+'" width="80" height="80" /></div>';
+        outdisplayItems += '<div class="col-md-9 col-xs-6 col-sm-6"><div>'+viewitemDetails[a].name+'</div>';
+        outdisplayItems += '<div>'+viewitemDetails[a].price+'</div><div><a href="cart.html?removeitem='+viewitemDetails[a].id+'">Remove</a></div></div></div>';    
+        
+        outdisplayItems += '<div class="cart-item__prizedetails col-md-3 col-xs-12 col-sm-12"><div><strong>Prize Details</strong></div>';
+        outdisplayItems += '<div>Total Payable '+viewitemDetails[a].price+'</div></div>';
+    }
+    
+    //console.log(outdisplayItems);
+    
+    document.getElementById("cartItems").innerHTML = outdisplayItems;
+} 
+    
+});
+</script>
+</head>
+<body>
+<!-- header starts -->
+<div class="cart-index__header col-md-12 col-xs-12 col-sm-12">
+    <div class="cart-index__header--logo col-md-9 col-xs-8 col-sm-8">
+        <a href="index.html"><img src="images/logo.png" width="60" height="60" /></a>
+    </div>
+    <div class="cart-index__header--search col-md-3 col-xs-4 col-sm-4">
+        <input type="text" name="search" value="" class="cart-inputsearch">
+        <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true" style="font-size:24px" ></span></a>
+        <a href="cart.html"><span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:24px"></span></a>
+    </div>
+</div>
+<!-- header ends -->  
+
+<!-- content starts -->
+<div class="cart-index__content col-md-12 col-xs-12 col-sm-12">
+    <div class="cart-index__content col-md-12 col-xs-12 col-sm-12">
+        <div id="cartItems"></div>
+    </div>
+    <div class="cart-index__content col-md-3 col-xs-12 col-sm-12">
+        
+    </div>
+</div>
+<!-- content ends -->    
+    
+<!-- footer starts -->
+<div class="cart-index__footer col-md-12 col-xs-12 col-sm-12 text-center">
+    <span>&copy; copyright</span>
+</div>
+<!-- footer ends -->
+</body>
+</html>
