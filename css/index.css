@@ -36,6 +36,41 @@ background-color:#33adff;
     min-height:495px;
     border-left:1px solid #3333;
 }
+.cart-index__content .cart-index__content--items {
+    padding:16px;
+}
+.cart-index__content .cart-index__content--title {
+    padding:8px 0 0 0;
+}
+.cart-index__content .cart-index__content--pricesection {
+   padding:16px 0 0 0; 
+   font-weight: bold;
+}
+.cart-index__content .cart-index__content--discount {   
+    padding:16px 0 0 16px;   
+    color: green;
+}
+a.cart-addtocart {
+    position: relative;
+    width:150px;
+    margin:16px 0 0 0;
+    display: inline-block;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: Arial, serif;
+    line-height: 22px;
+    font-size: 16px;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+    overflow: hidden;
+    transition: all 0.08s ease-in 0s;
+    border-radius: 17px;
+    background: #ffcc00;
+    border-color: #ffcc00;
+    padding:10px 22px;
+}
 /*** content ends **/
 
 /*** footer starts **/
