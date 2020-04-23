@@ -75,7 +75,7 @@ function myFunction(arr) {
   } else {
       for(var i = 0; i<arr.length; i++) {
         if(parseInt(arr[i].price)<=parseInt(maxprice)) {
-        outdisplayItems += '<div class="col-md-3 col-xs-12 col-sm-12"><div><img src="" width="100" height="100" /></div>';
+        outdisplayItems += '<div class="col-md-3 col-xs-12 col-sm-12"><div><img src="'+arr[i].img_url+'" width="100" height="100" /></div>';
         outdisplayItems += '<div>'+arr[i].name+'</div>';
         outdisplayItems += '<div>'+arr[i].price+'</div>';
         outdisplayItems += '<div><a href="index.html?additem='+arr[i].id+'">Add to Cart</a></div></div>';    
