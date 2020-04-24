@@ -58,7 +58,7 @@ a.cart-addtocart {
     color: #ffffff;
     cursor: pointer;
     font-family: Arial, serif;
-    line-height: 22px;
+    line-height: 16px;
     font-size: 16px;
     text-align: center;
     border-width: 2px;
@@ -69,7 +69,7 @@ a.cart-addtocart {
     border-radius: 17px;
     background: #ffcc00;
     border-color: #ffcc00;
-    padding:10px 22px;
+    padding:8px 22px;
 }
 /*** content ends **/
 
@@ -86,6 +86,13 @@ background-color:#33adff;
     text-align: center!important;
 }
 /*** footer ends **/
+.cart-apply__maxprice {
+    float:right;
+}
+.cart-apply__displayprice,.cart-apply__applybtn {
+    display:flex;
+    justify-content: center;
+}
 .slidecontainer a.cart-apply__price {
     position: relative;
     width:150px;
@@ -93,7 +100,7 @@ background-color:#33adff;
     color: #ffffff;
     cursor: pointer;
     font-family: Arial, serif;
-    line-height: 22px;
+    line-height: 16px;
     font-size: 16px;
     text-align: center;
     border-width: 2px;
@@ -102,24 +109,25 @@ background-color:#33adff;
     overflow: hidden;
     transition: all 0.08s ease-in 0s;
     border-radius: 17px;
-    background: #33adff;
-    border-color: #33adff;
-    padding:10px 22px;
+    background: #0040ff;
+    border-color: #0040ff;
+    padding:8px 22px;
 }
 .slidecontainer p {
     padding:16px 0 0 0;
     margin:0;
 }
+
 .slider {  
   -webkit-appearance: none;
   width: 100%;
-  height: 5px;
-  background: navy;
+  height: 3px;
+  background: #3399ff;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
-  margin:16px 0 0 0;
+  margin:4px 0 0 0;
 }
 
 .slider:hover {
