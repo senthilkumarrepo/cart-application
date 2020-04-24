@@ -2,6 +2,8 @@
 <html>
 <head>
 <title>Cart application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -172,9 +174,11 @@ if(maxprice!='') {
     <div class="cart-index__slider col-md-3 col-xs-12 col-sm-12">
         <div class="slidecontainer">
             <p><strong>Filters</strong></p>
+            <p class="car-apply__price"><span class="cart-apply__minprice">&#x20b9;100</span>
+                <span class="cart-apply__maxprice">&#x20b9;1000</span></p>
   <input type="range" min="100" max="1000" value="500" class="slider" id="myRange">
-  <p>Price: &#x20b9; <span id="price_val"></span></p>
-            <p><a href="javascript:void(0);" class="cart-apply__price">Apply</a></p>
+  <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_val"></span></p>
+            <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__price" role="button">Apply</a></p>
 </div>
         <script>
 var slider = document.getElementById("myRange");
