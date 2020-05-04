@@ -1,7 +1,16 @@
+/*** cart starts ***/
 .cart-item__viewcart,
 .cart-item__prizedetails {    
     border: 1px solid #d9d9d9;
     margin: 16px 0 0 8px;
     padding: 16px;
-    height: 100px;
+    height: 116px;
 }
+
+@media (min-width: 1024px) {
+    .cart-item__prizedetails {
+        position:absolute;
+        right:70px;
+    }    
+}
+/*** cart ends ***/
