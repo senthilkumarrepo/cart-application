@@ -41,6 +41,17 @@ var additem = getParameterByName('additem'); // "add item"
 var maxprice = getParameterByName('maxprice'); // "max price"
     //alert(additem);
     
+    var pageloaditemDetails = [];
+    pageloaditemDetails = JSON.parse(localStorage.getItem('itemDetails'));
+    console.log(pageloaditemDetails);
+    
+    if(pageloaditemDetails) {
+        document.getElementById('cart-count').innerHTML = pageloaditemDetails.length;
+    } else {
+        document.getElementById('cart-count').innerHTML = 0;
+    }
+    
+    
 if(!val || val=="desc") {    
 /** descending order **/
 myArray = myArray.sort((a, b) => Number(b.price) - Number(a.price));
@@ -55,15 +66,18 @@ myArray = myArray.sort((a, b) => Number(b.discount) - Number(a.discount));
 console.log("discount", myArray);    
 }
     
-//if(maxprice===null) { 
+if(maxprice!='') {
+    document.getElementById('myRange').value = maxprice;
+     document.getElementById('price_val').innerHTML = maxprice;
+} else {
+    //document.getElementById('myRange').value = 1000;
+    document.getElementById('price_val').innerHTML = 1000;
+}
+    
 myFunction(myArray);
-  //  alert(maxprice);
-//}
-
 
 function myFunction(arr) {
   var outdisplayItems = "";
-    //alert("test");
     
   if(maxprice===null) {
       for(var i = 0; i<arr.length; i++) {
@@ -115,25 +129,56 @@ function checkFunction(arr,item) {
           }
             
             console.log(itemObj);
-        
+            
+            var   additemDetails = [];  
+            var parseitemDetails = [];
             //test if itemDetails is null
             if(localStorage.getItem('itemDetails') === null){
             //initialize an array
-            var additemDetails = [];
+            //var additemDetails = [];
 
             //add itemObj into the array
             additemDetails.push(itemObj);
             } else {
             //get bookmarks from localStorage
-            var additemDetails = JSON.parse(localStorage.getItem('itemDetails'));
+            additemDetails = JSON.parse(localStorage.getItem('itemDetails'));
+            parseitemDetails = localStorage.getItem('itemDetails');
+            console.log('add items'+parseitemDetails );
+                
+            console.log(additemDetails.length);
+                
+            //console.log(parseitemDetails[a].id);
+                
+                var test = 1;
+                
+            for(c=0;c<additemDetails.length;c++) {
+                console.log(additemDetails[c].id);
+                
+                if(additemDetails[c].id==item) {
+                    
+                additemDetails[c].count = additemDetails[c].count+1;
+                    test = 0;
+                    //delete additemDetails[c];
+                    //additemDetails.push(itemObj);
+            }
+                
+            }
+            
+                if(test==1) {
+                    additemDetails.push(itemObj);
+                }
+            
+            //itemObj.count = 2;
 
             //add itemObj into array
-            additemDetails.push(itemObj);
+               // var filtered = additemDetails.filter(Boolean);
+                
+            
             } 
             
             //add item to storage                
             localStorage.setItem('itemDetails', JSON.stringify(additemDetails));
-            window.location.href = "cart.html";
+            window.location.href = "index.html";
         }
     }
     
@@ -145,12 +190,12 @@ function checkFunction(arr,item) {
         
     $(".cart-apply__price").click(function(){
    var priceval = $('#price_val').html();
+        if(priceval=='') {
+            priceval = 550;
+        }
     window.location.href = 'index.html?maxprice='+priceval;
 });
     
-if(maxprice!='') {
-    
-}
     
 });
 </script>
@@ -164,7 +209,10 @@ if(maxprice!='') {
     <div class="cart-index__header--search col-md-3 col-xs-4 col-sm-4">
         <input type="text" name="search" value="" class="cart-inputsearch">
         <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true" style="font-size:24px" ></span></a>
-        <a href="cart.html"><span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:24px"></span></a>
+        <a href="cart.html">
+        <span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:24px"></span>
+        <span id="cart-count" style="float: left;margin: 10px 0 0 0;padding: 0 0 0 6px;color: white;background: red;border-radius: 50%;width: 20px;height: 20px;"></span>
+        </a>
     </div>
 </div>
 <!-- header ends -->  
@@ -176,18 +224,34 @@ if(maxprice!='') {
             <p><strong>Filters</strong></p>
             <p class="car-apply__price"><span class="cart-apply__minprice">&#x20b9;100</span>
                 <span class="cart-apply__maxprice">&#x20b9;1000</span></p>
-  <input type="range" min="100" max="1000" value="500" class="slider" id="myRange">
+  <input type="range" min="100" max="1000" value="550" class="slider" id="myRange">
   <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_val"></span></p>
             <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__price" role="button">Apply</a></p>
 </div>
         <script>
+$(document).ready(function(){            
 var slider = document.getElementById("myRange");
 var output = document.getElementById("price_val");
-output.innerHTML = slider.value;
 
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}
+            //if(maxprice!='') {
+                //output.innerHTML = maxprice?maxprice:'1000';
+            //} else {
+                //output.innerHTML = 500;
+        //    }
+
+//if(maxprice!='') {
+    slider.oninput = function() {
+      //if(this.value=='') {
+        //  output.innerHTML = 1000;
+      //} else {
+          output.innerHTML = this.value;
+      //}
+      
+    }    
+//} else {
+ //output.innerHTML = 1000;   
+//}
+});
 </script>
         
     </div>
