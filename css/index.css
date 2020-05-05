@@ -1,151 +1,275 @@
-/*** header starts **/
-.cart-index__header {
-width:100%;
-margin:0;
-padding:0;
-background-color:#33adff;
-}
-.cart-index__header .cart-index__header--logo {
-    margin:0;
-    padding:0;
-}
-.cart-index__header .cart-index__header--search input
-{
-    float:left;
-    margin:20px 0 0 0;
-}
-.cart-index__header .cart-index__header--search .fa
-{
-    float:left;
-    margin:20px 0 0 10px;
-}
-/*** header ends **/
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-/*** content starts **/
-.cart-index__content {
-    float:left;
-    margin:0;
-    padding:0 16px;
-    min-height:495px;
-    background-color: #f5f5f5;     
-}
-.cart-index__content .cart-index__slider {
-    padding:0 16px 0 0;
-}
-.cart-index__content .cart-index__container {
-    min-height:495px;
-    border-left:1px solid #3333;
-}
-.cart-index__content .cart-index__content--items {
-    padding:16px;
-}
-.cart-index__content .cart-index__content--title {
-    padding:8px 0 0 0;
-}
-.cart-index__content .cart-index__content--pricesection {
-   padding:16px 0 0 0; 
-   font-weight: bold;
-}
-.cart-index__content .cart-index__content--discount {   
-    padding:16px 0 0 16px;   
-    color: green;
-}
-a.cart-addtocart {
-    position: relative;
-    width:150px;
-    margin:16px 0 0 0;
-    display: inline-block;
-    color: #ffffff;
-    cursor: pointer;
-    font-family: Arial, serif;
-    line-height: 16px;
-    font-size: 16px;
-    text-align: center;
-    border-width: 2px;
-    border-style: solid;
-    border-image: initial;
-    overflow: hidden;
-    transition: all 0.08s ease-in 0s;
-    border-radius: 17px;
-    background: #ffcc00;
-    border-color: #ffcc00;
-    padding:8px 22px;
-}
-/*** content ends **/
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-/*** footer starts **/
-.cart-index__footer {
-width: 100%;
-padding-right: 15px;
-padding-left: 15px;
-margin-right: auto;
-margin-left: auto;
-background-color:#33adff;
-}
-.cart-index__footer .text-center {
-    text-align: center!important;
-}
-/*** footer ends **/
-.cart-apply__maxprice {
-    float:right;
-}
-.cart-apply__displayprice,.cart-apply__applybtn {
-    display:flex;
-    justify-content: center;
-}
-.slidecontainer a.cart-apply__price {
-    position: relative;
-    width:150px;
-    display: inline-block;
-    color: #ffffff;
-    cursor: pointer;
-    font-family: Arial, serif;
-    line-height: 16px;
-    font-size: 16px;
-    text-align: center;
-    border-width: 2px;
-    border-style: solid;
-    border-image: initial;
-    overflow: hidden;
-    transition: all 0.08s ease-in 0s;
-    border-radius: 17px;
-    background: #0040ff;
-    border-color: #0040ff;
-    padding:8px 22px;
-}
-.slidecontainer p {
-    padding:16px 0 0 0;
-    margin:0;
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+<link rel="stylesheet" href="css/index.css">
+    
+<script src="json/Cart.json"></script>
+<script>
+$(document).ready(function(){
+$(".card-index-search").click(function(){
+ var inputsearch = $('.cart-inputsearch--index').val();
+    window.location.href = 'index.html?q='+inputsearch;
+});
+    
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-.slider {  
-  -webkit-appearance: none;
-  width: 100%;
-  height: 3px;
-  background: #3399ff;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  margin:4px 0 0 0;
+var val = getParameterByName('val'); // "value"
+var q = getParameterByName('q'); // "search"
+var additem = getParameterByName('additem'); // "add item"
+var maxprice = getParameterByName('maxprice'); // "max price"
+    
+    var pageloaditemDetails = [];
+    pageloaditemDetails = JSON.parse(localStorage.getItem('itemDetails'));
+    console.log(pageloaditemDetails);
+    
+    if(pageloaditemDetails) {
+        document.getElementById('cart-count').innerHTML = pageloaditemDetails.length;
+    } else {
+        document.getElementById('cart-count').innerHTML = 0;
+    }
+    
+    
+if(!val || val=="desc") {    
+/** descending order **/
+myArray = myArray.sort((a, b) => Number(b.price) - Number(a.price));
+console.log("descending", myArray);    
+} else if(val=="asc") {    
+/** ascending order **/
+myArray = myArray.sort((a, b) => Number(a.price) - Number(b.price));
+console.log("ascending", myArray);    
+} else if(val=="discount") {    
+/** ascending order **/
+myArray = myArray.sort((a, b) => Number(b.discount) - Number(a.discount));
+console.log("discount", myArray);    
 }
+    
+if(maxprice!='') {
+    document.getElementById('myRange').value = maxprice;
+     document.getElementById('price_val').innerHTML = maxprice;
+} else {
+    document.getElementById('price_val').innerHTML = 1000;
+}
+    
+myFunction(myArray);
 
-.slider:hover {
-  opacity: 1;
-}
+function myFunction(arr) {
+  var outdisplayItems = "";
+    
+  if(maxprice===null) {
+      for(var i = 0; i<arr.length; i++) {
+        if(q===null || (q!="" && q.toLowerCase() == arr[i].name.toLowerCase())) {
+        outdisplayItems += '<div class="cart-index__content--items col-md-3 col-xs-12 col-sm-12"><div><img src="'+arr[i].img_url+'" width="100" height="100" /></div>';
+        outdisplayItems += '<div class="cart-index__content--title">'+arr[i].name+'</div>';
+        outdisplayItems += '<div class="cart-index__content--pricesection"><span>&#x20b9;'+arr[i].price+'</span><span class="cart-index__content--discount">'+arr[i].discount+'% off</span></div>';
+        outdisplayItems += '<div><a href="index.html?additem='+arr[i].id+'" class="cart-addtocart">Add to Cart</a></div></div>';
+        }
+      } 
+  } else {
+      for(var i = 0; i<arr.length; i++) {
+        if(parseInt(arr[i].price)<=parseInt(maxprice)) {
+        outdisplayItems += '<div class="cart-index__content--items col-md-3 col-xs-12 col-sm-12"><div><img src="'+arr[i].img_url+'" width="100" height="100" /></div>';
+        outdisplayItems += '<div>'+arr[i].name+'</div>';
+        outdisplayItems += '<div class="cart-index__content--pricesection"><span>&#x20b9;'+arr[i].price+'</span><span class="cart-index__content--discount">'+arr[i].discount+'% off</span></div>';
+        outdisplayItems += '<div><a href="index.html?additem='+arr[i].id+'" class="cart-addtocart">Add to Cart</a></div></div>';
+        }
+      }       
+  }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #ffffff;
-  cursor: pointer;
-}
+   if((q===null || q!="") && outdisplayItems=="") {
+       document.getElementById("displayItems").innerHTML = '<div>No Records Found. Refine your search.</div>'
+   } else {
+   document.getElementById("displayItems").innerHTML = outdisplayItems;
+   }
 
-.slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #ffffff;
-  cursor: pointer;
+}  
+    
+if(additem!='') {
+
+checkFunction(myArray,additem);
+
+function checkFunction(arr,item) {
+  
+    for(var a = 0; a<arr.length; a++) {
+        if(arr[a].id==item) {
+            var itemObj = {
+            id: item,
+            name: arr[a].name,
+            category: arr[a].category,
+            price: arr[a].price,
+            discount: arr[a].discount,
+            img_url: arr[a].img_url,
+            count: 1
+          }
+            
+            console.log(itemObj);
+            
+            var   additemDetails = [];  
+            var parseitemDetails = [];
+            //test if itemDetails is null
+            if(localStorage.getItem('itemDetails') === null){
+
+            //add itemObj into the array
+            additemDetails.push(itemObj);
+            } else {
+            //get bookmarks from localStorage
+            additemDetails = JSON.parse(localStorage.getItem('itemDetails'));
+            parseitemDetails = localStorage.getItem('itemDetails');
+            console.log('add items'+parseitemDetails );
+                
+            console.log(additemDetails.length);
+                
+                var test = 1;
+                
+            for(c=0;c<additemDetails.length;c++) {
+                console.log(additemDetails[c].id);
+                
+                if(additemDetails[c].id==item) {
+                    
+                additemDetails[c].count = additemDetails[c].count+1;
+                    test = 0;
+            }
+                
+            }
+            
+                if(test==1) {
+                    additemDetails.push(itemObj);
+                }                
+            
+            } 
+            
+            //add item to storage                
+            localStorage.setItem('itemDetails', JSON.stringify(additemDetails));
+            window.location.href = "index.html";
+        }
+    }
+    
+    
+}    
+    
+
 }
+        
+    $(".cart-apply__price").click(function(){
+   var priceval = $('#price_val').html();
+        if(priceval=='') {
+            priceval = 550;
+        }
+    window.location.href = 'index.html?maxprice='+priceval;
+});
+    
+    
+});
+</script>
+</head>
+<body>
+<!-- header starts -->
+<div class="cart-index__header col-md-12 col-xs-12 col-sm-12">
+    <div class="cart-index__header--logo col-md-9 col-xs-3 col-sm-8">
+        <a href="index.html"><img src="images/logo.png" width="60" height="60" /></a>
+    </div>
+    <div class="cart-index__header--search col-md-3 col-xs-9 col-sm-4">
+        <input type="text" name="search" value="" class="cart-inputsearch--index">
+        <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true"></span></a>
+        <a href="cart.html">
+        <span class="fa fa-shopping-cart" aria-hidden="true"></span>
+        <span id="cart-count"></span>
+        </a>
+    </div>
+</div>
+<!-- header ends --> 
+    
+<!-- Mobile Filter Starts -->
+<div class="cart-index__filter--mobi col-xs-12 col-sm-12">
+    <div class="cart-index__sortby--mobi col-xs-6 col-sm-6">
+        <span class="cart-index__sortby--mobisortby">Sort By</span>
+        <div class="cart-index__sortby--mobisortbysection">
+            <a href="index.html?val=asc"><span class="fa fa-caret-up"></span></a>
+            <a href="index.html?val=desc"><span class="fa fa-caret-down"></span></a>
+        </div>
+    </div>
+    <div class="cart-index__filters--mobi col-xs-6 col-sm-6">
+        <a type="button" data-toggle="modal" data-target="#myModal">Filters</a>
+    </div>
+</div>
+<!-- Mobile Filter Ends -->
+    
+<!-- Mobile Modal Starts -->
+<div class="modal fade cart-index__filters--mobimodal" id="myModal" role="dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+    <div class="slidecontainer">
+            <p><strong>Filters</strong></p>
+            <p class="car-apply__price"><span class="cart-apply__minprice">&#x20b9;100</span>
+                <span class="cart-apply__maxprice">&#x20b9;1000</span></p>
+    <input type="range" min="100" max="1000" value="550" class="slider" id="myRange">
+    <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_val"></span></p>
+            <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__price" role="button">Apply</a></p>
+    </div>
+</div>
+<!-- Mobile Modal Ends -->
+
+<!-- content starts -->
+<div class="cart-index__content col-md-12 col-xs-12 col-sm-12">
+    <div class="cart-index__slider col-md-3 col-xs-12 col-sm-12">
+        <div class="slidecontainer">
+            <p><strong>Filters</strong></p>
+            <p class="car-apply__price"><span class="cart-apply__minprice">&#x20b9;100</span>
+                <span class="cart-apply__maxprice">&#x20b9;1000</span></p>
+  <input type="range" min="100" max="1000" value="550" class="slider" id="myRange">
+  <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_val"></span></p>
+            <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__price" role="button">Apply</a></p>
+</div>
+        <script>
+$(document).ready(function(){            
+var slider = document.getElementById("myRange");
+var output = document.getElementById("price_val");
+
+slider.oninput = function() {
+    output.innerHTML = this.value;
+}
+});
+</script>
+        
+    </div>
+    
+    <div class="cart-index__container col-md-9 col-xs-12 col-sm-12">
+        <div class="cart-index__content--title">
+            <strong>Sort By</strong>
+            <span><a href="index.html?val=desc">Price High -- Low</a></span>
+            <span><a href="index.html?val=asc">Price Low -- High</a></span>
+            <span><a href="index.html?val=discount">Discount</a></span>
+        </div>
+        <div id="displayItems">Loading...</div>
+    </div>
+</div>
+<!-- content ends -->    
+    
+<!-- footer starts -->
+<div class="cart-index__footer col-md-12 col-xs-12 col-sm-12 text-center">
+    <span>&copy; copyright</span>
+</div>
+<!-- footer ends -->
+</body>
+</html>
