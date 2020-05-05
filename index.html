@@ -71,9 +71,11 @@ console.log("discount", myArray);
     
 if(maxprice!='') {
     document.getElementById('myRange').value = maxprice;
-     document.getElementById('price_val').innerHTML = maxprice;
+    document.getElementById('price_val').innerHTML = maxprice;
+    document.getElementById('price_valmobi').innerHTML = maxprice;
 } else {
     document.getElementById('price_val').innerHTML = 1000;
+    document.getElementById('price_valmobi').innerHTML = 1000;
 }
     
 myFunction(myArray);
@@ -180,15 +182,22 @@ function checkFunction(arr,item) {
 
 }
         
-    $(".cart-apply__price").click(function(){
+$(".cart-apply__price").click(function(){
    var priceval = $('#price_val').html();
-        if(priceval=='') {
-            priceval = 550;
-        }
+    if(priceval=='') {
+        priceval = 550;
+    }
     window.location.href = 'index.html?maxprice='+priceval;
 });
-    
-    
+
+$(".cart-apply__pricemobi").click(function(){
+   var pricevalmobi = $('#price_valmobi').html();
+    if(pricevalmobi=='') {
+        pricevalmobi = 550;
+    }
+    window.location.href = 'index.html?maxprice='+pricevalmobi;
+});
+        
 });
 </script>
 </head>
@@ -232,9 +241,9 @@ function checkFunction(arr,item) {
             <p><strong>Filters</strong></p>
             <p class="car-apply__price"><span class="cart-apply__minprice">&#x20b9;100</span>
                 <span class="cart-apply__maxprice">&#x20b9;1000</span></p>
-    <input type="range" min="100" max="1000" value="550" class="slider" id="myRange">
-    <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_val"></span></p>
-            <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__price" role="button">Apply</a></p>
+    <input type="range" min="100" max="1000" value="550" class="slider" id="myRangeMobi">
+    <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_valmobi"></span></p>
+            <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__pricemobi" role="button">Apply</a></p>
     </div>
 </div>
 <!-- Mobile Modal Ends -->
@@ -257,6 +266,13 @@ var output = document.getElementById("price_val");
 
 slider.oninput = function() {
     output.innerHTML = this.value;
+}
+
+var sliderMobi = document.getElementById("myRangeMobi");
+var outputMobi = document.getElementById("price_valmobi");
+
+sliderMobi.oninput = function() {
+    outputMobi.innerHTML = this.value;
 }
 });
 </script>
