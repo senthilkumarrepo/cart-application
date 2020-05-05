@@ -51,7 +51,7 @@ background-color:#33adff;
 }
 .cart-index__content .cart-index__container {
     min-height:495px;
-    border-left:1px solid #333333;
+    border-left:1px solid #d9d9d9;
 }
 .cart-index__content .cart-index__content--items {
     padding:16px;
