@@ -22,7 +22,11 @@
 $(document).ready(function(){
 $(".card-index-search").click(function(){
  var inputsearch = $('.cart-inputsearch--index').val();
-    window.location.href = 'index.html?q='+inputsearch;
+    if(inputsearch!="") {
+        window.location.href = 'index.html?q='+inputsearch;
+    } else {
+        window.location.href = 'index.html';
+    }    
 });
     
 function getParameterByName(name, url) {
@@ -76,22 +80,27 @@ myFunction(myArray);
 
 function myFunction(arr) {
   var outdisplayItems = "";
+  var totalAmount = 0;
     
   if(maxprice===null) {
       for(var i = 0; i<arr.length; i++) {
+          totalAmount = arr[i].price+(arr[i].price*arr[i].discount/100);
+          
         if(q===null || (q!="" && q.toLowerCase() == arr[i].name.toLowerCase())) {
         outdisplayItems += '<div class="cart-index__content--items col-md-3 col-xs-12 col-sm-12"><div><img src="'+arr[i].img_url+'" width="100" height="100" /></div>';
         outdisplayItems += '<div class="cart-index__content--title">'+arr[i].name+'</div>';
-        outdisplayItems += '<div class="cart-index__content--pricesection"><span>&#x20b9;'+arr[i].price+'</span><span class="cart-index__content--discount">'+arr[i].discount+'% off</span></div>';
+        outdisplayItems += '<div class="cart-index__content--pricesection"><span>&#x20b9;'+arr[i].price+'</span><del>&#x20b9;'+totalAmount+'</del><span class="cart-index__content--discount">'+arr[i].discount+'% off</span></div>';
         outdisplayItems += '<div><a href="index.html?additem='+arr[i].id+'" class="cart-addtocart">Add to Cart</a></div></div>';
         }
       } 
   } else {
       for(var i = 0; i<arr.length; i++) {
+          totalAmount = arr[i].price+(arr[i].price*arr[i].discount/100);
+          
         if(parseInt(arr[i].price)<=parseInt(maxprice)) {
         outdisplayItems += '<div class="cart-index__content--items col-md-3 col-xs-12 col-sm-12"><div><img src="'+arr[i].img_url+'" width="100" height="100" /></div>';
         outdisplayItems += '<div>'+arr[i].name+'</div>';
-        outdisplayItems += '<div class="cart-index__content--pricesection"><span>&#x20b9;'+arr[i].price+'</span><span class="cart-index__content--discount">'+arr[i].discount+'% off</span></div>';
+        outdisplayItems += '<div class="cart-index__content--pricesection"><span>&#x20b9;'+arr[i].price+'</span><del>&#x20b9;'+totalAmount+'</del><span class="cart-index__content--discount">'+arr[i].discount+'% off</span></div>';
         outdisplayItems += '<div><a href="index.html?additem='+arr[i].id+'" class="cart-addtocart">Add to Cart</a></div></div>';
         }
       }       
@@ -190,7 +199,7 @@ function checkFunction(arr,item) {
         <a href="index.html"><img src="images/logo.png" width="60" height="60" /></a>
     </div>
     <div class="cart-index__header--search col-md-3 col-xs-9 col-sm-4">
-        <input type="text" name="search" value="" class="cart-inputsearch--index">
+        <input type="text" name="search" value="" class="cart-inputsearch--index" placeholder="Search">
         <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true"></span></a>
         <a href="cart.html">
         <span class="fa fa-shopping-cart" aria-hidden="true"></span>
