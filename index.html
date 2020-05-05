@@ -21,7 +21,7 @@
 <script>
 $(document).ready(function(){
 $(".card-index-search").click(function(){
- var inputsearch = $('.cart-inputsearch').val();
+ var inputsearch = $('.cart-inputsearch--index').val();
     window.location.href = 'index.html?q='+inputsearch;
 });
     
@@ -39,7 +39,6 @@ var val = getParameterByName('val'); // "value"
 var q = getParameterByName('q'); // "search"
 var additem = getParameterByName('additem'); // "add item"
 var maxprice = getParameterByName('maxprice'); // "max price"
-    //alert(additem);
     
     var pageloaditemDetails = [];
     pageloaditemDetails = JSON.parse(localStorage.getItem('itemDetails'));
@@ -70,7 +69,6 @@ if(maxprice!='') {
     document.getElementById('myRange').value = maxprice;
      document.getElementById('price_val').innerHTML = maxprice;
 } else {
-    //document.getElementById('myRange').value = 1000;
     document.getElementById('price_val').innerHTML = 1000;
 }
     
@@ -106,11 +104,8 @@ function myFunction(arr) {
    }
 
 }  
-//}
     
 if(additem!='') {
-    //alert(additem);
-    //console.log(myArray);
 
 checkFunction(myArray,additem);
 
@@ -134,8 +129,6 @@ function checkFunction(arr,item) {
             var parseitemDetails = [];
             //test if itemDetails is null
             if(localStorage.getItem('itemDetails') === null){
-            //initialize an array
-            //var additemDetails = [];
 
             //add itemObj into the array
             additemDetails.push(itemObj);
@@ -147,8 +140,6 @@ function checkFunction(arr,item) {
                 
             console.log(additemDetails.length);
                 
-            //console.log(parseitemDetails[a].id);
-                
                 var test = 1;
                 
             for(c=0;c<additemDetails.length;c++) {
@@ -158,21 +149,13 @@ function checkFunction(arr,item) {
                     
                 additemDetails[c].count = additemDetails[c].count+1;
                     test = 0;
-                    //delete additemDetails[c];
-                    //additemDetails.push(itemObj);
             }
                 
             }
             
                 if(test==1) {
                     additemDetails.push(itemObj);
-                }
-            
-            //itemObj.count = 2;
-
-            //add itemObj into array
-               // var filtered = additemDetails.filter(Boolean);
-                
+                }                
             
             } 
             
@@ -203,19 +186,49 @@ function checkFunction(arr,item) {
 <body>
 <!-- header starts -->
 <div class="cart-index__header col-md-12 col-xs-12 col-sm-12">
-    <div class="cart-index__header--logo col-md-9 col-xs-8 col-sm-8">
+    <div class="cart-index__header--logo col-md-9 col-xs-3 col-sm-8">
         <a href="index.html"><img src="images/logo.png" width="60" height="60" /></a>
     </div>
-    <div class="cart-index__header--search col-md-3 col-xs-4 col-sm-4">
-        <input type="text" name="search" value="" class="cart-inputsearch">
-        <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true" style="font-size:24px" ></span></a>
+    <div class="cart-index__header--search col-md-3 col-xs-9 col-sm-4">
+        <input type="text" name="search" value="" class="cart-inputsearch--index">
+        <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true"></span></a>
         <a href="cart.html">
-        <span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:24px"></span>
-        <span id="cart-count" style="float: left;margin: 10px 0 0 0;padding: 0 0 0 6px;color: white;background: red;border-radius: 50%;width: 20px;height: 20px;"></span>
+        <span class="fa fa-shopping-cart" aria-hidden="true"></span>
+        <span id="cart-count"></span>
         </a>
     </div>
 </div>
-<!-- header ends -->  
+<!-- header ends --> 
+    
+<!-- Mobile Filter Starts -->
+<div class="cart-index__filter--mobi col-xs-12 col-sm-12">
+    <div class="cart-index__sortby--mobi col-xs-6 col-sm-6">
+        <span class="cart-index__sortby--mobisortby">Sort By</span>
+        <div class="cart-index__sortby--mobisortbysection">
+            <a href="index.html?val=asc"><span class="fa fa-caret-up"></span></a>
+            <a href="index.html?val=desc"><span class="fa fa-caret-down"></span></a>
+        </div>
+    </div>
+    <div class="cart-index__filters--mobi col-xs-6 col-sm-6">
+        <a type="button" data-toggle="modal" data-target="#myModal">Filters</a>
+    </div>
+</div>
+<!-- Mobile Filter Ends -->
+    
+<!-- Mobile Modal Starts -->
+<div class="modal fade cart-index__filters--mobimodal" id="myModal" role="dialog">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+    <div class="slidecontainer">
+            <p><strong>Filters</strong></p>
+            <p class="car-apply__price"><span class="cart-apply__minprice">&#x20b9;100</span>
+                <span class="cart-apply__maxprice">&#x20b9;1000</span></p>
+    <input type="range" min="100" max="1000" value="550" class="slider" id="myRange">
+    <p class="cart-apply__displayprice">Price: &#x20b9; <span id="price_val"></span></p>
+            <p class="cart-apply__applybtn"><a href="javascript:void(0);" class="cart-apply__price" role="button">Apply</a></p>
+    </div>
+</div>
+<!-- Mobile Modal Ends -->
 
 <!-- content starts -->
 <div class="cart-index__content col-md-12 col-xs-12 col-sm-12">
@@ -233,24 +246,9 @@ $(document).ready(function(){
 var slider = document.getElementById("myRange");
 var output = document.getElementById("price_val");
 
-            //if(maxprice!='') {
-                //output.innerHTML = maxprice?maxprice:'1000';
-            //} else {
-                //output.innerHTML = 500;
-        //    }
-
-//if(maxprice!='') {
-    slider.oninput = function() {
-      //if(this.value=='') {
-        //  output.innerHTML = 1000;
-      //} else {
-          output.innerHTML = this.value;
-      //}
-      
-    }    
-//} else {
- //output.innerHTML = 1000;   
-//}
+slider.oninput = function() {
+    output.innerHTML = this.value;
+}
 });
 </script>
         
