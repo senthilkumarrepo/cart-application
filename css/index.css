@@ -107,6 +107,10 @@ a.cart-addtocart {
     width: 20px;
     height: 20px;
 }
+#displayItems {
+    padding: 32px 0 0 16px;
+    font-weight: 500;
+}
 /*** content ends **/
 
 /*** footer starts **/
@@ -129,7 +133,8 @@ background-color:#33adff;
     display:flex;
     justify-content: center;
 }
-.slidecontainer a.cart-apply__price {
+.slidecontainer a.cart-apply__price,
+.slidecontainer a.cart-apply__pricemobi {
     position: relative;
     width:150px;
     display: inline-block;
