@@ -1,3 +1,7 @@
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
 /*** cart starts ***/
 .cart-item__viewcart,
 .cart-item__prizedetails {    
@@ -6,8 +10,73 @@
     padding: 16px;
     height: 116px;
 }
+.cart-item__itemsection--price {
+    padding:16px 0 0 0;
+    font-size:12px;
+}
+.cart-item__itemsection--pricedisplay {
+    font-weight:bold;
+    font-size:14px;
+    padding:0 10px 0 0;
+}
+del {
+    font-size:12px;
+}
+.cart-item__itemsection--discount {
+    color: green;
+    font-weight: bold;
+}
+.cart-item__addsection  {
+    padding:14px 0 0 0;
+}
+.cart-item__addsection--count {
+    border: 1px solid grey;
+    padding: 4px 8px;
+    font-weight:bold;
+}
+.cart-item__addsection--dot {
+    margin:0 10px;
+    padding:0;
+    font-size: 16px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+    color:grey !important;
+  border: 1px solid grey;
+  line-height: 16px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;       
+}
+.cart-item__addsection--remove {
+    padding:16px 0 0 0;
+}
+.cart-item__addsection--removelink {
+    color:black;
+    font-weight:bold;
+}
 
+@media (max-width: 768px) {
+    .cart-index__content--section {
+       background-color: #f5f5f5;
+    }
+    .cart-item__prizedetails {
+        margin-left:0 !important;
+    }
+    .cart-item__viewcart {
+        height:160px !important;
+        padding-right:0 !important;
+    }  
+    .cart-item__addsection--remove {
+        padding-left:20px;
+    }
+}
 @media (min-width: 1024px) {
+    .cart-index__content--section {
+        padding:0;
+    }
     .cart-item__prizedetails {
         position:absolute;
         right:70px;
