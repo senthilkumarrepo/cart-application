@@ -24,13 +24,15 @@ background-color:#33adff;
     color: white;
     font-size:24px;
 }
-.cart-index__header .cart-index__header--search input
-{
+.cart-index__header .cart-index__header--search input {
     float:left;
+    color:white;
     margin:20px 0 0 0;
+    border:none;
+    border-bottom:1px solid white;
+    background-color: #33adff;
 }
-.cart-index__header .cart-index__header--search .fa
-{
+.cart-index__header .cart-index__header--search .fa {
     float:left;
     margin:20px 0 0 10px;
 }
@@ -59,7 +61,13 @@ background-color:#33adff;
 }
 .cart-index__content .cart-index__content--pricesection {
    padding:16px 0 0 0; 
+   font-weight:14px;
    font-weight: bold;
+}
+.cart-index__content--pricesection del {
+    padding:0 0 0 12px;
+    font-size:12px;
+    font-weight:normal;
 }
 .cart-index__content .cart-index__content--discount {   
     padding:16px 0 0 16px;   
