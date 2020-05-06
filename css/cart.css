@@ -3,12 +3,31 @@ body {
 }
 
 /*** cart starts ***/
-.cart-item__viewcart,
-.cart-item__prizedetails {    
+.cart-item__viewcart {    
     border: 1px solid #d9d9d9;
     margin: 16px 0 0 8px;
     padding: 16px;
     height: 116px;
+}
+.cart-item__prizedetails {    
+    border: 1px solid #d9d9d9;
+    margin: 16px 0 0 8px;
+    padding: 0;
+    height: auto;
+}
+.cart-item__prizedetails div { 
+    padding:8px;
+}
+.cart-item__prizedetails--title {
+    border-bottom: 1px solid #d9d9d9;   
+}
+.cart-item__prizedetails--discount {
+    padding:0 8px 8px 8px !important;
+}
+.cart-item__prizedetails--total {
+    font-weight:bold;
+    border-top: 1px solid #d9d9d9;
+    margin-top:8px 0 0 0;    
 }
 .cart-item__itemsection--price {
     padding:16px 0 0 0;
