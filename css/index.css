@@ -116,8 +116,7 @@ a.cart-addtocart {
 /*** footer starts **/
 .cart-index__footer {
 width: 100%;
-padding-right: 15px;
-padding-left: 15px;
+padding:8px 15px;
 margin-right: auto;
 margin-left: auto;
 background-color:#33adff;
