@@ -109,7 +109,8 @@ function myFunction(arr) {
   }
 
    if((q===null || q!="") && outdisplayItems=="") {
-       document.getElementById("displayItems").innerHTML = '<div>No Records Found. Refine your search.</div>'
+       document.getElementById("displayItems").innerHTML = '<div>No Records Found. Refine your search.</div>';
+       //$('.cart-inputsearch--index').val() = q;
    } else {
    document.getElementById("displayItems").innerHTML = outdisplayItems;
    }
