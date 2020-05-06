@@ -129,10 +129,10 @@ if(localStorage.getItem('itemDetails') !== null){
     
     parseTotalPrize = parsePrize+parseDiscount;
     
-    outdisplayItems += '<div class="cart-item__prizedetails col-md-3 col-xs-12 col-sm-12"><div><strong>Prize Details</strong></div>';
+    outdisplayItems += '<div class="cart-item__prizedetails col-md-3 col-xs-12 col-sm-12"><div class="cart-item__prizedetails--title"><strong>Prize Details</strong></div>';
     outdisplayItems += '<div><span>Prize :</span><span style="float:right;">&#x20b9;'+parseTotalPrize+'</span></div>';
-    outdisplayItems += '<div><span>Discount :</span><span style="float:right;">&#x20b9;'+parseDiscount+'</span></div>';
-    outdisplayItems += '<div><span>Total Payable </span><span style="float:right;">&#x20b9;'+parsePrize+'</span></div>';
+    outdisplayItems += '<div class="cart-item__prizedetails--discount"><span>Discount :</span><span style="float:right;">&#x20b9;'+parseDiscount+'</span></div>';
+    outdisplayItems += '<div class="cart-item__prizedetails--total"><span>Total Payable </span><span style="float:right;">&#x20b9;'+parsePrize+'</span></div>';
     
     document.getElementById("cartItems").innerHTML = outdisplayItems;
 } 
