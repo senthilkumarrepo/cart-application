@@ -44,6 +44,10 @@ var q = getParameterByName('q'); // "search"
 var additem = getParameterByName('additem'); // "add item"
 var maxprice = getParameterByName('maxprice'); // "max price"
     
+if(q!="") {
+    document.getElementById('cart-input-textbox').value = q;    
+}
+    
     var pageloaditemDetails = [];
     pageloaditemDetails = JSON.parse(localStorage.getItem('itemDetails'));
     console.log(pageloaditemDetails);
@@ -209,7 +213,7 @@ $(".cart-apply__pricemobi").click(function(){
         <a href="index.html"><img src="images/logo.png" width="60" height="60" /></a>
     </div>
     <div class="cart-index__header--search col-md-3 col-xs-9 col-sm-4">
-        <input type="text" name="search" value="" class="cart-inputsearch--index" placeholder="Search">
+        <input type="text" name="search" value="" id="cart-input-textbox" class="cart-inputsearch--index" placeholder="Search">
         <a href="javascript:void(0);" class="card-index-search"><span class="fa fa-search" aria-hidden="true"></span></a>
         <a href="cart.html">
         <span class="fa fa-shopping-cart" aria-hidden="true"></span>
